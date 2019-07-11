@@ -20,5 +20,5 @@ The cowrie.cfg file allows for sharing information with Cyber Security research 
 ## Conclusion
 The work done by Michel Oosterhof and the cowrie group is very impressive. Cowrie gives anyone with basic Linux skills and the ability to follow written instructions the path to create a great tool for analyzing Cyber Attacks.
 
-### Blogs to follow
-BLØGG.NO [CONTROL CODE USERNAMES IN TELNET HONEYPOT](https://bløgg.no/2017/12/control-code-usernames-in-telnet-honeypot/)
+###### Blogs of interest.
+- blog
