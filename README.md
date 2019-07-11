@@ -18,7 +18,8 @@ To start, I am using using the VPS [Digital Ocean](https://m.do.co/c/6de21b7fa28
 The cowrie.cfg file allows for sharing information with Cyber Security research organizations. In this experiment informnation is shared with [SANS DShield](https://isc.sans.edu/ssh.html), [Virus Total](https://www.virustotal.com/), and [csirtg](https://csirtg.io).
 
 ## Conclusion
-The work done by Michel Oosterhof and the cowrie group is very impressive. Cowrie gives anyone with basic Linux skills and the ability to follow written instructions the path to create a great tool for analyzing Cyber Attacks.
+The work done by Michel Oosterhof and the cowrie group is very impressive. Cowrie gives anyone with basic Linux skills and the ability to follow written instructions the means to create a great tool for analyzing Cyber Attacks.
 
-###### Blogs of interest.
-- blog
+#### Blogs of interest.
+- Bløgg.no
+  - [Control Code Usernames in Telnet Honeypot](https://bløgg.no/2017/12/control-code-usernames-in-telnet-honeypot/)
