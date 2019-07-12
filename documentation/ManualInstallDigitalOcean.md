@@ -88,9 +88,19 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
               Confirm the changes made.
             - $ sudo netstat -nalp | grep -i ssh (should show ssh on port 22666)
             - $ sudo iptables -t nat -L (should show redirect rules)
-   #### Insalling Cowrie.
-   ###### *Note: This is taken directly from the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/INSTALL.html)*
-        
-            
-            
+   #### Insalling Cowrie
+   ###### *Note: These steps are taken directly from the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/INSTALL.html#step-1-install-dependencies) Note, stilled logged into the droplet as the user develop.*
+         1. Install support for Python3 virtual environments and other dependencies
+         -  $ sudo apt-get install git python-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind
+         - $ sudo su - cowrie
+         2. Checkout the cowrie code from github
+         - $ git clone http://github.com/cowrie/cowrie
+         - $ cd cowrie
+         3. Setup Python3 Virtual Environment
+         - $ virtualenv --python=python3 cowrie-env
+         4. Activate the virtual environment and install packages
+         - $ source cowrie-env/bin/activate
+         - $ pip install --upgrade pip
+         - $ pip install --upgrade -r requirements.txt
+         Installation of cowrie.cfg is done from HNSS github
          
