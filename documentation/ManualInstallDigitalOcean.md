@@ -3,8 +3,7 @@
 ### Introduction
 The following are the instructions for installing cowrie on a [Digital Ocean](https://m.do.co/c/6de21b7fa280) Ubuntu 18.04 x64 droplet. For the honeypot, the minimum virtual machine is all that is required. As of this writing, the cost is $5.00/mo.  The steps are placed in this document to consolidate the steps I take to deploy a honeypot.
 
-Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to install cowrie. Note, the following steps employ ssh for connecting to the droplet. How you connect is a matter of choice. The steps 
-
+Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to install cowrie. Note, the following steps employ ssh for connecting to the droplet. How you connect is a matter of choice. 
 
 ###### *Note: If you use the Digital Ocean console to interact with your droplet. The default configuration for the keyboard does not allow the character '|' to be typed. Instead, it returns the '>' character. The work around is to turn on Num Lock, hold alt key down and enter 124.*
 #### Setup Digital Ocean account and configure droplet
