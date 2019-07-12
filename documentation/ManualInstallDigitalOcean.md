@@ -53,8 +53,8 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
    Hacker Target has a great diagram of what is being configured with the port change in sshd_config and the iptable rules.
    ![logo](https://hackertarget.com/wp-content/uploads/2018/03/cowrie-honeypot-layout.png "cowrie ssh diagram")
    
-   In the following steps, the server administration (SSH) is differs from the diagram by changing 22222 to 22666.
-   ###### *Note: Using IP Tables one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
+   In the following steps, the server administration (SSH) differs from the diagram by changing 22222 to 22666.
+   ###### *Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
       1. Change default port in sshd_config
          1. sudo cp /etc/ssh/sshd_config /root/sshd_config.org
          2. sudo vi /etc/ssh/sshd_config
@@ -74,15 +74,24 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             - $ sudo iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222
             - $ sudo iptables -t nat -L (Confirm changed state)
               Save the configuration information.
-            - sudo sh -c "iptables-save > /etc/iptables.rules"
+            - $ sudo sh -c "iptables-save > /etc/iptables.rules"
               Make iptables persistent
-            - sudo apt-get update
-            - sudo apt-get install iptables-persistent
+            - $ sudo apt-get update
+            - $ sudo apt-get install iptables-persistent
               Test changes
-            - sudo shutdown -r now
+            - $ sudo shutdown -r now
               From remote computer
-            - ssh develop@droplet.ip.address (should fail on Port 22)
-            - ssh develop@droplet.ip.address -p 22666 (should succeed)
+            - $ ssh develop@droplet.ip.address (should fail on Port 22)
+            - $ ssh develop@droplet.ip.address -p 22666 (should succeed)
+              Update if needed
+            - sudo apt-get update
+            - sudo apt-get upgrade
+              Confirm the changes made.
+            - $ sudo netstat -nalp | grep -i ssh (should show ssh on port 22666)
+            - $ sudo iptables -t nat -L (should show redirect rules)
+   #### Insalling Cowrie.
+   ###### *Note: This is taken directly from the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/INSTALL.html)*
+        
             
             
          
