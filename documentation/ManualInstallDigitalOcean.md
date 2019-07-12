@@ -7,8 +7,7 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
 
 ###### *Note: If you use the Digital Ocean console to interact with your droplet. The default configuration for the keyboard does not allow the character '|' to be typed. Instead, it returns the '>' character. The work around is to turn on Num Lock, hold alt key down and enter 124.*
 #### Setup Digital Ocean account and configure droplet
-###### *note*
-         1. [Create Digital Ocean Account](https://m.do.co/c/6de21b7fa280)
+         1. Create [Digital Ocean Account](https://m.do.co/c/6de21b7fa280)
          2. Recomended to create a *New Project*. For me, it is Cowrie-Honeypot-Experiment.
          3. Select desired project and [Create Digital Ocean Droplet](https://www.digitalocean.com/docs/droplets/how-to/create/)
             1. For image choose Ubuntu 18.04 x64
@@ -25,57 +24,59 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             - $ passwd
          6. Change timezone of server to match your location. (Opptional)
             - $ dpkg-reconfigure tzdata
-#### Configure userids to manage cowrie tasks
-###### *Note: (It is best to choose a name common or related to a server for fs.pickle)*
+#### Configure userid to manage cowrie tasks
+*Note: (It is best to choose a name common or related to a server for fs.pickle)*
          1. Create a user to manage the droplet. (Here still logged in remotely as root)
-            - $ adduser develop (user exists on remote computer)
-            - $ usermod -aG sudo develop
-            Allow user develop to run sudo without password. (Optional)
-            - $ cp /etc/sudoers /root/sudoers.org
-            - $ visudo
+            1. $ adduser develop (user exists on remote computer)
+            2. $ usermod -aG sudo develop
+         2. Allow user develop to run sudo without password. (Optional)
+            1. $ cp /etc/sudoers /root/sudoers.org
+            2. $ visudo
+            (Add to bottom of the file)
             develop ALL=(ALL) NOPASSWD:ALL
-            To avoid creating SSH keys copy root ssh key
-            - rsync --archive --chown=develop:develop ~/.ssh /home/develop
+         3. To avoid creating SSH keys for develop copy root's ssh key
+            1. rsync --archive --chown=develop:develop ~/.ssh /home/develop
 #### Create cowrie userid and others
-###### *Note: (These userids are common ssh attack ids or related to a server for fs.pickle)*            
-         . SSH into droplet from remote computer as user develop
-      - $ ssh develop@droplet.ip.address
-      6. Create cowrie and releated users.
-      - $ sudo adduser --disabled-password cowrie
-      - $ sudo adduser --disabled-password tomcat
-      - $ sudo adduser --disabled-password oracle
-      - $ sudo adduser --disabled-password administrator
-      - $ sudo adduser --disabled-password pi
-   #### Configure droplet to have cowrie listening on port(22).
-   Hacker Target has a great diagram of what is being configured with the port change in sshd_config and the iptable rules.
+*Note: (These userids are common ssh attack ids or related to a server for fs.pickle)*            
+         1. SSH into droplet from remote computer as user develop
+            1. $ ssh develop@droplet.ip.address
+         2. Create cowrie and releated users.
+            1. $ sudo adduser --disabled-password cowrie
+            2. $ sudo adduser --disabled-password tomcat
+            3. $ sudo adduser --disabled-password oracle
+            4. $ sudo adduser --disabled-password administrator
+            5. $ sudo adduser --disabled-password pi
+#### Configure droplet to have cowrie listening on port(22).
+[Hacker Target](https://hackertarget.com) has a great diagram of what is being configured with the port change in sshd_config and the iptable rules.
    ![logo](https://hackertarget.com/wp-content/uploads/2018/03/cowrie-honeypot-layout.png "cowrie ssh diagram")
    
-   In the following steps, the server administration (SSH) differs from the diagram by changing 22222 to 22666.
-   ###### *Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
-   1. Change default port in sshd_config
-      1. sudo cp /etc/ssh/sshd_config /root/sshd_config.org
-      2. sudo vi /etc/ssh/sshd_config
-      3. At the top of file change #Port 22 to your value example:
-      - Port 22666
-      4. Check (Optional, I am always at least checking before and after changes.)
-      - $ grep Port /etc/ssh/sshd_config
-      - $ sudo systemctl status ssh (Curious, seeing invalid attempts from user 'pi'...)
-      - $ sudo netstat -nalp | grep -i ssh (Confirm ssh on Port 22)
-      - $ sudo systemctl restart ssh
-      - $ sudo netstat -nalp | grep -i ssh (Confirm ssh on Port 22666)
-      - $ sudo systemctl status ssh 
-   5. iptable rules
-            - $ sudo iptables -t nat -L (Current state)
+In the following steps, the server administration (SSH) differs from the diagram by changing 22222 to 22666.
+*Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
+         1. Change default port in sshd_config
+            1. sudo cp /etc/ssh/sshd_config /root/sshd_config.org
+            2. sudo vi /etc/ssh/sshd_config
+            3. At the top of file change #Port 22 to your value example:
+            Port 22666
+         2. Check (Optional, I am always at least checking before and after changes.)
+            1. $ grep Port /etc/ssh/sshd_config
+            2. $ sudo systemctl status ssh (Curious, seeing invalid attempts from user 'pi'...)
+            3. $ sudo netstat -nalp | grep -i ssh (Confirm ssh on Port 22)
+            4. $ sudo systemctl restart ssh
+            5. $ sudo netstat -nalp | grep -i ssh (Confirm ssh on Port 22666)
+            6. $ sudo systemctl status ssh
+#### Configure iptable rules.
+         1. iptable rules
+            1. $ sudo iptables -t nat -L (Current state)
               Add rules REROUTING to where cowrie will be running on 2222 and 2223
             - $ sudo iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222
             - $ sudo iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222
             - $ sudo iptables -t nat -L (Confirm changed state)
               Save the configuration information.
             - $ sudo sh -c "iptables-save > /etc/iptables.rules"
-              Make iptables persistent
+         2. Make iptables persistent
             - $ sudo apt-get update
             - $ sudo apt-get install iptables-persistent
-              Test changes
+         3. Test changes
             - $ sudo shutdown -r now
               From remote computer
             - $ ssh develop@droplet.ip.address (should fail on Port 22)
@@ -83,7 +84,7 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
               Update if needed
             - sudo apt-get update
             - sudo apt-get upgrade
-              Confirm the changes made.
+         4. Confirm the changes made.
             - $ sudo netstat -nalp | grep -i ssh (should show ssh on port 22666)
             - $ sudo iptables -t nat -L (should show redirect rules)
    #### Insalling Cowrie
