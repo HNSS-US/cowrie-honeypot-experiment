@@ -91,39 +91,39 @@ In the following steps, the server administration (SSH) differs from the diagram
 #### Insalling Cowrie
 ###### *Note: These steps are taken from the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/INSTALL.html#step-1-install-dependencies) plus additional steps to install MySQL 8. Note, stilled logged into the droplet as the user develop.*
          1. Install support for Python3 virtual environments and other dependencies
-         -  $ sudo apt-get install git python-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind
-         - $ sudo su - cowrie
+            1.  $ sudo apt-get install git python-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind
+            2. $ sudo su - cowrie
          2. Checkout the cowrie code from github
-         - $ git clone http://github.com/cowrie/cowrie
-         - $ cd cowrie
+            1. $ git clone http://github.com/cowrie/cowrie
+            2. $ cd cowrie
          3. Setup Python3 Virtual Environment
-         - $ virtualenv --python=python3 cowrie-env
+            1. $ virtualenv --python=python3 cowrie-env
          4. Activate the virtual environment and install packages
-         - $ source cowrie-env/bin/activate
-         - $ pip install --upgrade pip
-         - $ pip install --upgrade -r requirements.txt
-         Installation of cowrie.cfg is done from HNSS github
-         - wget https://raw.githubusercontent.com/HNSS-US/cowrie-honeypot-experiment/master/cowrie.cfg
+            1. $ source cowrie-env/bin/activate
+            2. $ pip install --upgrade pip
+            3. $ pip install --upgrade -r requirements.txt
+         5. Installation of cowrie.cfg is done from HNSS github
+            1. wget https://raw.githubusercontent.com/HNSS-US/cowrie-honeypot-experiment/master/cowrie.cfg
 #### Send Cowrie Output to a MySQL Database
 ###### *Note:In order to install MySQL 8.0 there are steps not in the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/sql/README.html#how-to-send-cowrie-output-to-a-mysql-database)*
-         1. Using curl find the latest version of MySQL
-            - $ curl -s  https://repo.mysql.com// | grep deb
+         1. Using web browser find the latest version of MySQL
+            1. $ https://repo.mysql.com//
          2. Download file (2019-07-12)
-            - $ curl -OL curl -OL https://repo.mysql.com//mysql-apt-config_0.8.13-1_all.deb
+            1. $ curl -OL curl -OL https://repo.mysql.com//mysql-apt-config_0.8.13-1_all.deb
          3. Install
-            - $ sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
+            1. $ sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
          4. At prompt select 'OK'
          5. Delete Package
-            - $ rm mysql-apt-config_0.8.13-1_all.deb
+            -1. $ rm mysql-apt-config_0.8.13-1_all.deb
          6. Installation (Now back to cowrie [document](https://cowrie.readthedocs.io/en/latest/sql/README.html#installation)
-            - $ sudo apt-get install mysql-server libmysqlclient-dev python-mysqldb
+            1. $ sudo apt-get install mysql-server libmysqlclient-dev python-mysqldb
          7. Securing MySQL (Not in cowrie documentation)
-            - $ sudo mysql_secure_installation
-            - Enter a password for user root:*********
+            1. $ sudo mysql_secure_installation
+            2. Enter a password for user root:*********
          8. Change to user cowrie
-            - $ sudo su - cowrie (Back in cowrie documentation, missing sudo)
+            1. $ sudo su - cowrie (Back in cowrie documentation, missing sudo)
          9. Activate the virtual environment
-            - $ source cowrie/cowrie-env/bin/activate
+            1. $ source cowrie/cowrie-env/bin/activate
          10. Install mysqlclient
-            - $ pip install mysqlclient
+            1. $ pip install mysqlclient
          
