@@ -1,7 +1,7 @@
 # Installing cowrie on Digital Ocean Ubuntu 18.04 x64
 
 ### Introduction
-The following are the instructions for installing cowrie on a [Digital Ocean](https://m.do.co/c/6de21b7fa280) Ubuntu 18.04 x64 droplet. For the honeypot, the minimum virtual machine is all that is required. As of this writing, this cost $5.00/mo. These steps are copied and pasted from the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/). The steps are placed in this document for ease of use.
+The following are the instructions for installing cowrie on a [Digital Ocean](https://m.do.co/c/6de21b7fa280) Ubuntu 18.04 x64 droplet. For the honeypot, the minimum virtual machine is all that is required. As of this writing, the cost is $5.00/mo.  The steps are placed in this document to consolidate the steps I take to deploy a honeypot.
 
 Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to install cowrie. Note, the following steps employ ssh for connecting to the droplet. How you connect is a matter of choice. The steps 
 
