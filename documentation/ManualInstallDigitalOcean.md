@@ -103,4 +103,27 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
          - $ pip install --upgrade pip
          - $ pip install --upgrade -r requirements.txt
          Installation of cowrie.cfg is done from HNSS github
+         - wget https://raw.githubusercontent.com/HNSS-US/cowrie-honeypot-experiment/master/cowrie.cfg
+#### Send Cowrie Output to a MySQL Database
+###### *Note:In order to install MySQL 8.0 there are steps not in the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/sql/README.html#how-to-send-cowrie-output-to-a-mysql-database)*
+         1. Using curl find the latest version of MySQL
+         - $ curl -s  https://repo.mysql.com// | grep deb
+         2. Download file (2019-07-12)
+         - $ curl -OL curl -OL https://repo.mysql.com//mysql-apt-config_0.8.13-1_all.deb
+         3. Install
+         - $ sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
+         4. At prompt select 'OK'
+         5. Delete Package
+         - $ rm mysql-apt-config_0.8.13-1_all.deb
+         6. Installation (Now back to cowrie [document](https://cowrie.readthedocs.io/en/latest/sql/README.html#installation)
+         - $ sudo apt-get install mysql-server libmysqlclient-dev python-mysqldb
+         7. Securing MySQL (Not in cowrie documentation)
+         - $ sudo mysql_secure_installation
+         - Enter a password for user root:*********
+         8. Change to user cowrie
+         - $ sudo su - cowrie (Back in cowrie documentation, missing sudo)
+         9. Activate the virtual environment
+         - $ source cowrie/cowrie-env/bin/activate
+         10. Install mysqlclient
+         - $ pip install mysqlclient
          
