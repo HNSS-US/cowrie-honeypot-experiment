@@ -45,6 +45,10 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             5. $ sudo adduser --disabled-password pi
 #### Configure droplet to have cowrie listening on port(22).
 [Hacker Target](https://hackertarget.com) has a great diagram of what is being configured with the port change in sshd_config and the iptable rules.
+
+![logo](https://hackertarget.com/wp-content/uploads/2018/03/cowrie-honeypot-layout.png "cowrie ssh diagram")
+
+In the following steps, the server administration (SSH) differs from the diagram by changing 22222 to 22666.
 #### Configure SSH Server
          1. Change default port in sshd_config
             1. sudo cp /etc/ssh/sshd_config /root/sshd_config.org
@@ -82,7 +86,6 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             1. $ sudo netstat -nalp | grep -i ssh (should show ssh on port 22666)
             2. $ sudo iptables -t nat -L (should show redirect rules)
 #### Insalling Cowrie
-(https://cowrie.readthedocs.io/en/latest/INSTALL.html#step-1-install-dependencies) plus additional steps to install MySQL 8. Note, stilled logged into the droplet as the user develop.*
          1. Install support for Python3 virtual environments and other dependencies
             1.  $ sudo apt-get install git python-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind
             2. $ sudo su - cowrie
