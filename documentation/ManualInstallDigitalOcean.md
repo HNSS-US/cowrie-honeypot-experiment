@@ -104,6 +104,7 @@ In the following steps, the server administration (SSH) differs from the diagram
             1. $ virtualenv --python=python3 cowrie-env
          4. Activate the virtual environment and install packages
             1. $ source cowrie-env/bin/activate
+            2. $ pip install requests (needed for dsheild)
             2. $ pip install --upgrade pip
             3. $ pip install --upgrade -r requirements.txt
          5. Installation of cowrie.cfg is done from HNSS github
@@ -159,6 +160,7 @@ In the following steps, the server administration (SSH) differs from the diagram
                   1. enter userid
                   2. enter auth_key
                   3. uncomment batch_size
+                  4. enabled = true
                3. uncomment [output_virustotal]
                   1. enabled = True 
                   2. api_key = ***************
@@ -178,8 +180,13 @@ In the following steps, the server administration (SSH) differs from the diagram
                1. $ cd /home/cowrie/cowrie/share/cowrie
                2. $ sudo mv fs.pickle fs.pickle.org
                3. $ sudo /home/cowrie/cowrie/bin/createfs -l /. -o/home/cowrie/cowrie/share/cowrie/fs.pickle -p
-               
-            
-            
-            
-            
+#### Start cowrie
+               Activate cowrie enviorment
+               1. $ source /home/cowrie/cowrie/cowrie-env/bin/activate
+               2. $ /home/cowrie/cowrie/bin cowrie
+               3. cd /home/cowrie/cowrie/var/log/cowrie
+               Confirm in cowrie.log that the following eengines loaded
+               2019-07-13T18:11:20.702513-0400 [-] Loaded output engine: jsonlog
+               2019-07-13T18:11:20.730005-0400 [-] Loaded output engine: mysql
+               2019-07-13T18:11:20.877182-0400 [-] Loaded output engine: dshield
+               2019-07-13T18:11:20.878851-0400 [-] Loaded output engine: virustotal
