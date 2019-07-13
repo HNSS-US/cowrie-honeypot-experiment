@@ -126,4 +126,21 @@ In the following steps, the server administration (SSH) differs from the diagram
             1. $ source cowrie/cowrie-env/bin/activate
          10. Install mysqlclient
             1. $ pip install mysqlclient
-         
+### MySQL Configuration
+         1. ssh into droplet as user develop
+         2. Create an empty database named ‘cowrie'
+            1. $ sudo mysql -u root
+            2. mysql>  CREATE DATABASE cowrie;
+            3. mysql> GRANT ALL ON cowrie.* TO 'cowrie'@'localhost' IDENTIFIED BY 'PASSWORD HERE';
+            4. mysql> FLUSH PRIVILEGES;
+            5. mysql> exit
+            Create cowrie database schema
+            6. $ cd /home/cowrie/cowrie/docs/sql
+            7. $ mysql -u cowrie -p
+            8. mysql> USE cowrie;
+            9. mysql> source mysql.sql;
+            10. mysql> exit
+### Configure cowrie.cfg
+            1. cd /home/cowrie/cowrie/etc
+            2. sudo 
+            
