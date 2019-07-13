@@ -1,5 +1,4 @@
 # Installing cowrie on Digital Ocean Ubuntu 18.04 x64
-
 ### Introduction
 The following are the instructions for installing cowrie on a [Digital Ocean](https://m.do.co/c/6de21b7fa280) Ubuntu 18.04 x64 droplet. For the honeypot, the minimum virtual machine is all that is required. As of this writing, the cost is $5.00/mo.  The steps are placed in this document to consolidate the steps I take to deploy a honeypot.
 
@@ -24,9 +23,8 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             1. $ passwd
          6. Change timezone of server to match your location. (Opptional)
             1. $ dpkg-reconfigure tzdata
-
 #### Configure userid to manage cowrie tasks
-> *Note: (It is best to choose a name common or related to a server for fs.pickle)*
+> *Note: It is best to choose a name common or related to a server for fs.pickle.*
          1. Create a user to manage the droplet. (Here still logged in remotely as root)
             1. $ adduser develop (user exists on remote computer)
             2. $ usermod -aG sudo develop
@@ -39,7 +37,7 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             1. rsync --archive --chown=develop:develop ~/.ssh /home/develop
 
 #### Create cowrie userid and others
-> *Note: (These userids are common ssh attack ids or related to a server for fs.pickle)*            
+> *Note: These userids are common ssh attack ids or related to a server for fs.pickle.*
          1. SSH into droplet from remote computer as user develop
             1. $ ssh develop@droplet.ip.address
          2. Create cowrie and releated users.
