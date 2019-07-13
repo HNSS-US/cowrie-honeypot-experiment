@@ -24,6 +24,7 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             1. $ passwd
          6. Change timezone of server to match your location. (Opptional)
             1. $ dpkg-reconfigure tzdata
+
 #### Configure userid to manage cowrie tasks
 > *Note: (It is best to choose a name common or related to a server for fs.pickle)*
          1. Create a user to manage the droplet. (Here still logged in remotely as root)
@@ -36,8 +37,9 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
             develop ALL=(ALL) NOPASSWD:ALL
          3. To avoid creating SSH keys for develop copy root's ssh key
             1. rsync --archive --chown=develop:develop ~/.ssh /home/develop
+
 #### Create cowrie userid and others
-###### *Note: (These userids are common ssh attack ids or related to a server for fs.pickle)*            
+> *Note: (These userids are common ssh attack ids or related to a server for fs.pickle)*            
          1. SSH into droplet from remote computer as user develop
             1. $ ssh develop@droplet.ip.address
          2. Create cowrie and releated users.
@@ -51,7 +53,7 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
    ![logo](https://hackertarget.com/wp-content/uploads/2018/03/cowrie-honeypot-layout.png "cowrie ssh diagram")
    
 In the following steps, the server administration (SSH) differs from the diagram by changing 22222 to 22666.
-###### *Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
+> *Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
          1. Change default port in sshd_config
             1. sudo cp /etc/ssh/sshd_config /root/sshd_config.org
             2. sudo vi /etc/ssh/sshd_config
