@@ -24,6 +24,8 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
          6. Change timezone of server to match your location. (Opptional)
             1. $ dpkg-reconfigure tzdata
 #### Configure userid to manage cowrie tasks
+> *Note: It is best to choose a name common or related to a server and needed for fs.pickle.*
+
          1. Create a user to manage the droplet. (Here still logged in remotely as root)
             1. $ adduser develop (user exists on remote computer)
             2. $ usermod -aG sudo develop
@@ -35,6 +37,8 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
          3. To avoid creating SSH keys for develop copy root's ssh key
             1. rsync --archive --chown=develop:develop ~/.ssh /home/develop
 #### Create cowrie userid and others
+> *Note: These userids are common ssh attack ids or related to a server and needed for fs.pickle.*
+
          1. SSH into droplet from remote computer as user develop
             1. $ ssh develop@droplet.ip.address
          2. Create cowrie and releated users.
@@ -63,6 +67,8 @@ In the following steps, the server administration (SSH) differs from the diagram
             5. $ sudo netstat -nalp | grep -i ssh (Confirm ssh on Port 22666)
             6. $ sudo systemctl status ssh
 #### Configure iptable rules.
+> *Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*
+
          1. iptable rules
             1. $ sudo iptables -t nat -L (Current state)
               Add rules REROUTING to where cowrie will be running on 2222 and 2223
@@ -86,6 +92,8 @@ In the following steps, the server administration (SSH) differs from the diagram
             1. $ sudo netstat -nalp | grep -i ssh (should show ssh on port 22666)
             2. $ sudo iptables -t nat -L (should show redirect rules)
 #### Insalling Cowrie
+> *Note: These steps are taken from the cowrie [documentation](> *Note: Using IP Tables is one of three possible [methods](https://cowrie.readthedocs.io/en/latest/INSTALL.html) to have cowrie listen on Port 22.*)
+
          1. Install support for Python3 virtual environments and other dependencies
             1.  $ sudo apt-get install git python-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind
             2. $ sudo su - cowrie
@@ -101,7 +109,8 @@ In the following steps, the server administration (SSH) differs from the diagram
          5. Installation of cowrie.cfg is done from HNSS github
             1. wget https://raw.githubusercontent.com/HNSS-US/cowrie-honeypot-experiment/master/cowrie.cfg
 #### Send Cowrie Output to a MySQL Database
-###### *Note:In order to install MySQL 8.0 there are steps not in the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/sql/README.html#how-to-send-cowrie-output-to-a-mysql-database)*
+> *Note:In order to install MySQL 8.0 there are steps not in the cowrie [documentation](https://cowrie.readthedocs.io/en/latest/sql/README.html#how-to-send-cowrie-output-to-a-mysql-database)*
+
          1. Using web browser find the latest version of MySQL
             1. $ https://repo.mysql.com//
          2. Download file (2019-07-12)
@@ -122,7 +131,7 @@ In the following steps, the server administration (SSH) differs from the diagram
             1. $ source cowrie/cowrie-env/bin/activate
          10. Install mysqlclient
             1. $ pip install mysqlclient
-### MySQL Configuration
+#### MySQL Configuration
          1. ssh into droplet as user develop
          2. Create an empty database named ‘cowrie'
             1. $ sudo mysql -u root
@@ -136,7 +145,41 @@ In the following steps, the server administration (SSH) differs from the diagram
             8. mysql> USE cowrie;
             9. mysql> source mysql.sql;
             10. mysql> exit
-### Configure cowrie.cfg
+#### Configure cowrie.cfg
+> *Note: The default cowrie.cfg file has hostname=svr04 and is a give away for running cowrie.*
+
             1. cd /home/cowrie/cowrie/etc
-            2. sudo 
+            2. sudo vi cowrie.cfg
+            3. Make changes to
+               1. [honeypot]
+                  1. sensor_name
+                  2. hostname
+                  3. enter mysql password
+               2. [output_dshield]
+                  1. enter userid
+                  2. enter auth_key
+                  3. uncomment batch_size
+               3. uncomment [output_virustotal]
+                  1. enabled = True 
+                  2. api_key = ***************
+                  3. upload = True
+                  4. debug = False
+                  5. scan_file = True
+                  6. scan_url = True
+               4. [output_csirtg]
+                  1. enabled = true
+                  2. username = *****
+                  3. feed = scanners
+                  4. description = random scanning activity
+                  5. token = ************************
+#### Create new fs.pickle
+> *Note: The default fs.pickle file has userid richard and is a give away for running cowrie.*
+
+               1. $ cd /home/cowrie/cowrie/share/cowrie
+               2. $ sudo mv fs.pickle fs.pickle.org
+               3. $ sudo /home/cowrie/cowrie/bin/createfs -l /. -o/home/cowrie/cowrie/share/cowrie/fs.pickle -p
+               
+            
+            
+            
             
