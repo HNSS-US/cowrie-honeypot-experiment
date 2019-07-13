@@ -7,9 +7,9 @@ Once the Ubuntu 18.04 droplet is created, follow the steps outlined below to ins
 
 ###### *Note: If you use the Digital Ocean console to interact with your droplet. The default configuration for the keyboard does not allow the character '|' to be typed. Instead, it returns the '>' character. The work around is to turn on Num Lock, hold alt key down and enter 124.*
 #### Setup Digital Ocean account and configure droplet
-         1. Create [Digital Ocean Account](https://m.do.co/c/6de21b7fa280)
-         2. Recomended to create a *New Project*. For me, it is Cowrie-Honeypot-Experiment.
-         3. Select desired project and [Create Digital Ocean Droplet](https://www.digitalocean.com/docs/droplets/how-to/create/)
+            1. Create [Digital Ocean Account](https://m.do.co/c/6de21b7fa280)
+            2. Recomended to create a *New Project*. For me, it is Cowrie-Honeypot-Experiment.
+            3. Select desired project and [Create Digital Ocean Droplet](https://www.digitalocean.com/docs/droplets/how-to/create/)
             1. For image choose Ubuntu 18.04 x64
             2. For plan choose $5/mo
             3. Choose a datacenter region of your choice.
