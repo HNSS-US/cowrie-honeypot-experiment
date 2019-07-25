@@ -115,7 +115,7 @@ In the following steps, the server administration (SSH) differs from the diagram
          1. Using web browser find the latest version of MySQL
             1. $ https://repo.mysql.com//
          2. Download file (2019-07-12)
-            1. $ curl -OL curl -OL https://repo.mysql.com//mysql-apt-config_0.8.13-1_all.deb
+            1. $ curl -OL https://repo.mysql.com//mysql-apt-config_0.8.13-1_all.deb
          3. Install
             1. $ sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
          4. At prompt select 'OK'
