@@ -118,6 +118,7 @@ In the following steps, the server administration (SSH) differs from the diagram
             1. $ curl -OL https://repo.mysql.com//mysql-apt-config_0.8.13-1_all.deb
          3. Install
             1. $ sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
+            2. $ sudo apt-get update
          4. At prompt select 'OK'
          5. Delete Package
             -1. $ rm mysql-apt-config_0.8.13-1_all.deb
